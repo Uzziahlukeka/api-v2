@@ -1,0 +1,19 @@
+{
+    "name": "acer/api-v2",
+    "autoload": {
+        "psr-4": {
+            "Acer\\ApiV2\\": "src/",
+            "uzziah\\":["config/","models/"]
+        }
+    },
+    "authors": [
+        {
+            "name": "uzziah lukeka",
+            "email": "uzziahlukeka@gmail.com"
+        }
+    ],
+    "require": {
+        "league/oauth2-server": "^8.4",
+        "zendframework/zend-diactoros": "^1.3"
+    }
+}
