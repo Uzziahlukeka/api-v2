@@ -31,13 +31,16 @@ $post->email=$data->email;
 $post->passw=$data->passw;
 
 //create post
+$result=$post->create();
 
-if($post->create()){
-    echo json_encode(
-        array('message'=>'user created','name'=>$post->name,'id'=>$post->id)
-    );
+if ($result['success']) {
+    echo json_encode([
+        'message' => 'User created',
+        'name' => $post->name,
+        'id' => $post->id
+    ]);
 } else{
-    echo json_encode(
-        array('message'=>'user not created')
-    );
+    echo json_encode([
+        'message' => $result['message']
+    ]);
 }

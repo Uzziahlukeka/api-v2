@@ -30,8 +30,7 @@ $post_arr=array(
     'name'=>$post->name,
     'email'=>$post->email,
     'create_at'=>$post->createAt,
-    'password'=>$post->passw
-    
+    'password'=>$post->passw   
 );
 
 //make json 
