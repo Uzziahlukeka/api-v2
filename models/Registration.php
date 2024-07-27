@@ -132,7 +132,8 @@ class Registration
     public function update()
     {
         $query = "UPDATE {$this->table}
-                  SET name = :name, email = :email
+                  SET name = :name, 
+                  email = :email
                   WHERE id = :id";
 
         $stmt = $this->con->prepare($query);
@@ -196,7 +197,7 @@ class Registration
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-       
+
 
         $this->id = $row['id'];
         $this->name = $row['name'];
@@ -213,11 +214,13 @@ class Registration
     {
         $query = "UPDATE {$this->table}
                   SET password = :password_hash,
-                      token_reset = NULL,
-                      reset_time = NULL
+                    token_reset =NULL,
+                    reset_time =NULL
                   WHERE id = :id";
 
-                $stmt = $this->con->prepare($query);
+        $stmt = $this->con->prepare($query);
+
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if ($this->validatePassword($password_hash)) {
             $this->hash = password_hash($password_hash, PASSWORD_DEFAULT);
@@ -233,6 +236,19 @@ class Registration
             echo "Something went wrong";
             die();
         }
+    }
 
+    public function setResetToken($email, $token_hash, $expiry)
+    {
+        $sql = "UPDATE {$this->table}
+                SET reset_token_hash = :token_hash, reset_token_expires_at = :reset_time
+                WHERE email = :email";
+
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam(':token_hash', $token_hash);
+        $stmt->bindParam(':reset_time', $expiry);
+        $stmt->bindParam(':email', $email);
+
+        return $stmt->execute();
     }
 }
