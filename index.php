@@ -55,6 +55,12 @@ $router->get('/user/read', function() {
 $router->get('/user/forget', function() {
     require 'api/user/forget.php';
 });
+$router->get('/user/findbytoken', function() {
+    require 'api/user/findbytoken.php';
+});
+$router->post('/user/newpassword', function() {
+    require 'api/user/setResetToken.php';
+});
 
 
 $router->post('/login', function() {

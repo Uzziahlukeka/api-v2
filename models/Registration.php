@@ -110,13 +110,12 @@ class Registration
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        
-            $this->id = $row['id'];
-            $this->name = $row['name'];
-            $this->email = $row['email'];
-            $this->createAt = $row['created_at'];
-            $this->passw = $row['password'];
-        
+
+        $this->id = $row['id'];
+        $this->name = $row['name'];
+        $this->email = $row['email'];
+        $this->createAt = $row['created_at'];
+        $this->passw = $row['password'];
     }
 
     public function delete()
@@ -172,7 +171,8 @@ class Registration
     public function resetPassword()
     {
         $query = "UPDATE {$this->table}
-                  SET token_reset = :token, reset_time = :reset_time
+                  SET token_reset = :token,
+                    reset_time = :reset_time
                   WHERE email = :email";
 
         $stmt = $this->con->prepare($query);
@@ -181,49 +181,58 @@ class Registration
         $stmt->bindParam(':email', $this->email);
 
         if ($stmt->execute() && $stmt->rowCount() > 0) {
-            
+
             return true;
         }
         return false;
     }
 
-    public function setResetToken($email, $token_hash, $expiry)
-    {
-        $query = "UPDATE {$this->table}
-                  SET reset_token_hash = :token_hash, reset_token_expires_at = :reset_time
-                  WHERE email = :email";
-
-        $stmt = $this->con->prepare($query);
-        $stmt->bindParam(':token_hash', $token_hash);
-        $stmt->bindParam(':reset_time', $expiry);
-        $stmt->bindParam(':email', $email);
-
-        return $stmt->execute();
-    }
-
     public function findByResetToken($token_hash)
     {
-        $query = "SELECT * FROM {$this->table} WHERE reset_token_hash = :token_hash";
+        $query = "SELECT * FROM {$this->table} WHERE token_reset = :token_hash";
         $stmt = $this->con->prepare($query);
         $stmt->bindParam(':token_hash', $token_hash);
         $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+       
+
+        $this->id = $row['id'];
+        $this->name = $row['name'];
+        $this->email = $row['email'];
+        $this->createAt = $row['created_at'];
+        $this->passw = $row['password'];
+        $this->token = $row['token_reset'];
+        $this->reset_time = $row['reset_time'];
+
+        return true;
     }
 
     public function updatePassword($userId, $password_hash)
     {
         $query = "UPDATE {$this->table}
-                  SET password_hash = :password_hash,
-                      reset_token_hash = NULL,
-                      reset_token_expires_at = NULL
+                  SET password = :password_hash,
+                      token_reset = NULL,
+                      reset_time = NULL
                   WHERE id = :id";
 
-        $stmt = $this->con->prepare($query);
-        $stmt->bindParam(':password_hash', $password_hash);
-        $stmt->bindParam(':id', $userId);
+                $stmt = $this->con->prepare($query);
 
-        return $stmt->execute();
+        if ($this->validatePassword($password_hash)) {
+            $this->hash = password_hash($password_hash, PASSWORD_DEFAULT);
+            $stmt->bindParam(':password_hash', $this->hash);
+            $stmt->bindParam(':id', $userId);
+
+            if ($stmt->execute()) {
+                return ['success' => true];
+            } else {
+                return ['success' => false, 'message' => 'User not created. Error: ' . $stmt->errorInfo()[2]];
+            }
+        } else {
+            echo "Something went wrong";
+            die();
+        }
+
     }
 }
-?>
