@@ -197,8 +197,6 @@ class Registration
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-
         $this->id = $row['id'];
         $this->name = $row['name'];
         $this->email = $row['email'];
@@ -210,28 +208,23 @@ class Registration
         return true;
     }
 
-    public function updatePassword($userId, $password_hash)
+    public function updatePassword()
     {
         $query = "UPDATE {$this->table}
-                  SET password = :password_hash,
-                    token_reset =NULL,
-                    reset_time =NULL
+                  SET token_reset = NULL,
+                    reset_time = NULL,
+                   password = :password_hash
                   WHERE id = :id";
 
         $stmt = $this->con->prepare($query);
 
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if ($this->validatePassword($this->passw)) {
+            $this->hash = password_hash($this->passw, PASSWORD_DEFAULT);
 
-        if ($this->validatePassword($password_hash)) {
-            $this->hash = password_hash($password_hash, PASSWORD_DEFAULT);
             $stmt->bindParam(':password_hash', $this->hash);
-            $stmt->bindParam(':id', $userId);
+            $stmt->bindParam(':id', $this->id);
 
-            if ($stmt->execute()) {
-                return ['success' => true];
-            } else {
-                return ['success' => false, 'message' => 'User not created. Error: ' . $stmt->errorInfo()[2]];
-            }
+            return $stmt->execute();
         } else {
             echo "Something went wrong";
             die();
@@ -241,7 +234,7 @@ class Registration
     public function setResetToken($email, $token_hash, $expiry)
     {
         $sql = "UPDATE {$this->table}
-                SET reset_token_hash = :token_hash, reset_token_expires_at = :reset_time
+                SET token_reset = :token_hash, reset_time = :reset_time
                 WHERE email = :email";
 
         $stmt = $this->con->prepare($sql);

@@ -24,12 +24,13 @@ $post=new Registration($db);
 $data=json_decode(file_get_contents('php://input'));
 
 //set ID to update
-$id=$data->id;
-$password=$data->password;
+$post->id=$data->id;
+$post->passw=$data->password; 
+
 //update post
-if($post->updatePassword($id,$password)){
+if($post->updatePassword()){
     echo json_encode(
-        array('message'=>'password uzh update')
+        array('message'=>'password update')
     );
 
 }else{
