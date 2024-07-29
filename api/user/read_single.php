@@ -18,8 +18,7 @@ $db=$database->connect();
 $post=new Registration($db);
 
 //Get ID
-$post->name=isset($_GET['name']) ? $_GET['name'] : die();
-//isset then = ? , : else 
+$post->id=isset($_GET['id']) ? $_GET['id'] : die();
 
 //get post
 $post->read_single();

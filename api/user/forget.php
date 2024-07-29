@@ -26,7 +26,7 @@ $post->reset_time = $expiry;
 if ($post->resetPassword()) {
     $post_arr=array(
         'email'=>$email,
-        'token'=>$token,
+        'token'=>$token_hash,
         'reset_time'=>$expiry 
     );
     

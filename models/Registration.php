@@ -49,35 +49,38 @@ class Registration
 
     public function create()
     {
+        // Check if the email already exists
         if ($this->emailExists($this->email)) {
             return ['success' => false, 'message' => 'Email already in use'];
         }
 
-        $query = "INSERT INTO {$this->table}
-                  SET id = :id, name = :name, email = :email, password = :password";
-
+        // Prepare the query
+        $query = "INSERT INTO {$this->table} (id, name, email, password) VALUES (:id, :name, :email, :password)";
         $stmt = $this->con->prepare($query);
 
+        // Sanitize and strip tags
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->passw = htmlspecialchars(strip_tags($this->passw));
 
+        // Bind parameters
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':name', $this->name);
         $stmt->bindParam(':email', $this->email);
 
+        // Validate and hash the password
         if ($this->validatePassword($this->passw)) {
             $this->hash = password_hash($this->passw, PASSWORD_DEFAULT);
             $stmt->bindParam(':password', $this->hash);
 
+            // Execute the query
             if ($stmt->execute()) {
-                return ['success' => true];
+                return ['success' => true, 'message' => 'Record created successfully'];
             } else {
-                return ['success' => false, 'message' => 'User not created. Error: ' . $stmt->errorInfo()[2]];
+                return ['success' => false, 'message' => 'Failed to create record'];
             }
         } else {
-            echo "Something went wrong";
-            die();
+            return ['success' => false, 'message' => 'Invalid password'];
         }
     }
 
@@ -92,6 +95,7 @@ class Registration
         return $result['count'] > 0;
     }
 
+
     public function read()
     {
         $query = "SELECT id, name, email, created_at FROM {$this->table} ORDER BY created_at DESC";
@@ -101,11 +105,10 @@ class Registration
         return $stmt;
     }
 
-    public function read_single()
-    {
-        $query = "SELECT id, name, email, created_at, password FROM {$this->table} WHERE name = ? LIMIT 0,1";
+    public function read_single(){
+        $query = "SELECT id, name, email, created_at, password FROM {$this->table} WHERE id = ? LIMIT 0,1";
         $stmt = $this->con->prepare($query);
-        $stmt->bindParam(1, $this->name);
+        $stmt->bindParam(1, $this->id);
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -152,17 +155,17 @@ class Registration
     private function validatePassword(string $password)
     {
         if (strlen($password) < 8) {
-            echo "Please enter a password with at least 8 characters.";
+            // "Please enter a password with at least 8 characters.";
             return false;
         }
 
         if (!preg_match('/[A-Z]/', $password)) {
-            echo "Please enter a password with at least one uppercase letter.";
+            //echo "Please enter a password with at least one uppercase letter.";
             return false;
         }
 
         if (!preg_match('/[0-9\W]/', $password)) {
-            echo "Please enter a password with at least one digit or special character.";
+           // echo "Please enter a password with at least one digit or special character.";
             return false;
         }
 
@@ -229,19 +232,5 @@ class Registration
             echo "Something went wrong";
             die();
         }
-    }
-
-    public function setResetToken($email, $token_hash, $expiry)
-    {
-        $sql = "UPDATE {$this->table}
-                SET token_reset = :token_hash, reset_time = :reset_time
-                WHERE email = :email";
-
-        $stmt = $this->con->prepare($sql);
-        $stmt->bindParam(':token_hash', $token_hash);
-        $stmt->bindParam(':reset_time', $expiry);
-        $stmt->bindParam(':email', $email);
-
-        return $stmt->execute();
     }
 }

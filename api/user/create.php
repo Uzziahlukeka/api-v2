@@ -31,16 +31,19 @@ $post->email=$data->email;
 $post->passw=$data->passw;
 
 //create post
-$result=$post->create();
 
-if ($result['success']) {
+$result = $post->create();
+
+if (is_array($result) && isset($result['success']) && $result['success']) {
+    // Success case where $result is an associative array
     echo json_encode([
-        'message' => 'User created',
+        'message' => $result['message'],
         'name' => $post->name,
         'id' => $post->id
     ]);
-} else{
+} else {
+    // Failure case where $result is false or an associative array with 'success' as false
     echo json_encode([
-        'message' => $result['message']
+        'message' => isset($result['message']) ? $result['message'] : 'An unknown error occurred'
     ]);
 }
