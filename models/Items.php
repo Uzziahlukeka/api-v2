@@ -97,6 +97,7 @@ class Items {
 
         //set properties
         
+        $this->item_id = $row['item_id'];
         $this->item_name = $row['item_name'];
         $this->item_photo = $row['item_photo'];
         $this->item_description = $row['item_description'];

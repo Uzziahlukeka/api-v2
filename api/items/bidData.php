@@ -6,9 +6,10 @@ namespace uzziah;
 header('Access-control-Allow-Origin:*');
 header('content-Type:application/json');
 
+
 require_once 'vendor/autoload.php';
 use uzziah\Database;
-use uzziah\Items;
+use uzziah\Bids;
 
 //instantiate DB and connect
 
@@ -16,22 +17,29 @@ $database=new Database();
 $db=$database->connect();
 
 //instantiate blog post object
-$post=new Items($db);
+$post=new BIds($db);
 
 //Get ID
-$post->item_name=isset($_GET['item_name']) ? $_GET['item_name'] : die(json_encode(['message' => 'Item name not provided']));
+$item_id = $_GET['item_id'] ?? null;
+$user_id = $_GET['user_id'] ?? null;
 
+// Validate data
+if ($item_id === null || $user_id === null) {
+    echo json_encode(['message' => 'Item ID or User ID not provided']);
+    exit;
+}
+
+$post->item_id=$item_id;
+$post->user_id=$user_id;
 //get post
-$post->read_single();
+$post->read_data();
 
 //create array 
 $post_arr=array(
     'item_id'=>$post->item_id,
-    'item_name'=>$post->item_name,
-    'item_photo'=>$post->item_photo ,
-    'item_description'=>$post->item_description,
+    'user_id'=>$post->user_id,
     'item_price'=>$post->item_price,
-    'user_id'=>$post->user_id
+    'bid_amount'=>$post->bid_amount
 );
 
 //make json 

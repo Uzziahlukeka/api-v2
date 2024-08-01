@@ -106,7 +106,7 @@ class Registration
     }
 
     public function read_single(){
-        $query = "SELECT id, name, email, created_at, password FROM {$this->table} WHERE id = ? LIMIT 0,1";
+        $query = "SELECT id,name, email, created_at, password FROM {$this->table} WHERE id = ? LIMIT 0,1";
         $stmt = $this->con->prepare($query);
         $stmt->bindParam(1, $this->id);
         $stmt->execute();

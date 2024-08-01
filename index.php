@@ -71,6 +71,12 @@ $router->post('/login', function() {
 $router->post('/add/item', function() {
     require 'api/items/create.php';
 });
+$router->post('/bid/item', function() {
+    require 'api/items/bid.php';
+});
+$router->get('/paymentData/item', function() {
+    require 'api/items/bidData.php';
+});
 $router->delete('/delete/item', function() {
     require 'api/items/delete.php';
 });
