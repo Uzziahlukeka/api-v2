@@ -137,8 +137,7 @@ class Items {
                 item_description = :item_description,
                 item_price = :item_price
             WHERE 
-                item_name = :item_name 
-                AND user_id = :user_id';
+                user_id = :user_id';
     
         // Prepare statement 
         $stmt = $this->con->prepare($query);

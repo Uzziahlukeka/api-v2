@@ -39,7 +39,8 @@ $post_arr=array(
     'item_id'=>$post->item_id,
     'user_id'=>$post->user_id,
     'item_price'=>$post->item_price,
-    'bid_amount'=>$post->bid_amount
+    'bid_amount'=>$post->bid_amount,
+    'your_bid'=>$post->your_bid
 );
 
 //make json 

@@ -72,10 +72,13 @@ $router->post('/add/item', function() {
     require 'api/items/create.php';
 });
 $router->post('/bid/item', function() {
-    require 'api/items/bid.php';
+    require 'api/bids/bid.php';
+});
+$router->get('/bid/read', function() {
+    require 'api/bids/read.php';
 });
 $router->get('/paymentData/item', function() {
-    require 'api/items/bidData.php';
+    require 'api/bids/bidData.php';
 });
 $router->delete('/delete/item', function() {
     require 'api/items/delete.php';
