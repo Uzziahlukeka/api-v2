@@ -11,31 +11,6 @@ class ComposerStaticInitae2331414663e2528e123b036d9150e5
         array (
             'uzziah\\' => 7,
         ),
-        'Z' => 
-        array (
-            'Zend\\Diactoros\\' => 15,
-        ),
-        'S' => 
-        array (
-            'StellaMaris\\Clock\\' => 18,
-        ),
-        'P' => 
-        array (
-            'Psr\\Http\\Message\\' => 17,
-            'Psr\\Clock\\' => 10,
-        ),
-        'L' => 
-        array (
-            'League\\Uri\\' => 11,
-            'League\\OAuth2\\Server\\' => 21,
-            'League\\Event\\' => 13,
-            'Lcobucci\\JWT\\' => 13,
-            'Lcobucci\\Clock\\' => 15,
-        ),
-        'D' => 
-        array (
-            'Defuse\\Crypto\\' => 14,
-        ),
         'A' => 
         array (
             'Acer\\ApiV2\\' => 11,
@@ -47,47 +22,6 @@ class ComposerStaticInitae2331414663e2528e123b036d9150e5
         array (
             0 => __DIR__ . '/../..' . '/config',
             1 => __DIR__ . '/../..' . '/models',
-        ),
-        'Zend\\Diactoros\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
-        ),
-        'StellaMaris\\Clock\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/stella-maris/clock/src',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'Psr\\Clock\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/clock/src',
-        ),
-        'League\\Uri\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/uri/src',
-            1 => __DIR__ . '/..' . '/league/uri-interfaces/src',
-        ),
-        'League\\OAuth2\\Server\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/oauth2-server/src',
-        ),
-        'League\\Event\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/event/src',
-        ),
-        'Lcobucci\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
-        ),
-        'Lcobucci\\Clock\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/lcobucci/clock/src',
-        ),
-        'Defuse\\Crypto\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
         ),
         'Acer\\ApiV2\\' => 
         array (

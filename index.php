@@ -62,11 +62,9 @@ $router->post('/user/newpassword', function() {
     require 'api/user/setResetToken.php';
 });
 
-
 $router->post('/login', function() {
     require 'api/user/login.php';
 });
-
 
 $router->post('/add/item', function() {
     require 'api/items/create.php';
@@ -92,7 +90,6 @@ $router->get('/read/items', function() {
 $router->get('/read/item', function() {
     require 'api/items/read_single.php';
 });
-
 
 $router->get('/', function() {
     require 'home.php';

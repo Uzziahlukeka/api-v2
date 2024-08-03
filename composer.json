@@ -11,9 +11,5 @@
             "name": "uzziah lukeka",
             "email": "uzziahlukeka@gmail.com"
         }
-    ],
-    "require": {
-        "league/oauth2-server": "^8.4",
-        "zendframework/zend-diactoros": "^1.3"
-    }
+    ]
 }
