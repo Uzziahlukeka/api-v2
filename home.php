@@ -150,11 +150,16 @@
         <div class="section">
             <h2>Support</h2>
             <p>If you have any questions or need further assistance, feel free to reach out to our support team at <a href="mailto:uzziahlukeka@gmail.com">support@uzziahinc.com</a>.</p>
+           
+        </div>
+        <div class="section">
+        <h2>message</h2>
+        <p>Thank you for choosing our API. We look forward to helping you build amazing things!</p>
         </div>
     </div>
 
     <footer>
-        <p>Thank you for choosing our API. We look forward to helping you build amazing things!</p>
+         <p>&copy; 2024 Uzziah Inc. All rights reserved.</p>
     </footer>
 </body>
 </html>

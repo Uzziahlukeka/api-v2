@@ -40,7 +40,7 @@ class Router
 
 $router = new Router();
 
- $router->post('/user/create', function() {
+$router->post('/user/create', function() {
      require 'api/user/create.php';
  });
 $router->delete('/user/delete', function() {
