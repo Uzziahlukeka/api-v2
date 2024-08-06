@@ -1,7 +1,6 @@
 <?php
 
 namespace uzziah;
-//headers for allowing access to the HTTP
 
 header('Access-control-Allow-Origin:*');
 header('content-Type:application/json');
