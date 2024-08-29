@@ -6,29 +6,26 @@ class Router
     private $basePath = '';
 
     public function __construct($basePath = '') {
-        $this->basePath = $basePath;
+        $this->basePath = rtrim($basePath, '/');
     }
 
-
-    public function get($url, $handler)
-    {
-        $this->routes['GET'][$url] = $handler;
-    } 
-    public function post($url,$handler){
-
-        $this->routes['POST'][$url]=$handler;
-    }
-    public function put($url,$handler){
-
-        $this->routes['PUT'][$url]=$handler;
-    }
-    public function delete($url,$handler){
-
-        $this->routes['DELETE'][$url]=$handler;
+    public function get($url, $handler) {
+        $this->routes['GET'][rtrim($url, '/')] = $handler;
     }
 
-    public function run()
-    {
+    public function post($url, $handler) {
+        $this->routes['POST'][rtrim($url, '/')] = $handler;
+    }
+
+    public function put($url, $handler) {
+        $this->routes['PUT'][rtrim($url, '/')] = $handler;
+    }
+
+    public function delete($url, $handler) {
+        $this->routes['DELETE'][rtrim($url, '/')] = $handler;
+    }
+
+    public function run() {
         $httpMethod = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
 
@@ -38,9 +35,6 @@ class Router
         if ($this->basePath) {
             $path = str_replace($this->basePath, '', $path);
         }
-
-        error_log("HTTP Method: $httpMethod");
-        error_log("Path: $path");
 
         if (isset($this->routes[$httpMethod][$path])) {
             call_user_func($this->routes[$httpMethod][$path]);
