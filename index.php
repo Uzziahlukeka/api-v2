@@ -92,7 +92,7 @@ $router->get('/read/item', function() {
 });
 
 $router->get('/', function() {
-    require 'home.php';
+    require 'api/items/read.php';
 });
 
 
