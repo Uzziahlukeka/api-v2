@@ -33,11 +33,14 @@ class Router
         $uri = $_SERVER['REQUEST_URI'];
 
         $uriParts = explode('?', $uri, 2);
-        $path = $uriParts[0];
+        $path = rtrim($uriParts[0], '/');
 
         if ($this->basePath) {
             $path = str_replace($this->basePath, '', $path);
         }
+
+        error_log("HTTP Method: $httpMethod");
+        error_log("Path: $path");
 
         if (isset($this->routes[$httpMethod][$path])) {
             call_user_func($this->routes[$httpMethod][$path]);
