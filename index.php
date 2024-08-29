@@ -84,7 +84,7 @@ $router->delete('/delete/item', function() {
 $router->post('/edit/item', function() {
     require 'api/items/update.php';
 });
-$router->get('/read/items', function() {
+$router->get('read/items', function() {
     require 'api/items/read.php';
 });
 $router->get('/read/item', function() {
