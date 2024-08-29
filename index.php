@@ -3,6 +3,12 @@ namespace uzziah;
 class Router
 {
     private $routes = [];
+    private $basePath = '';
+
+    public function __construct($basePath = '') {
+        $this->basePath = $basePath;
+    }
+
 
     public function get($url, $handler)
     {
@@ -28,6 +34,10 @@ class Router
 
         $uriParts = explode('?', $uri, 2);
         $path = $uriParts[0];
+
+        if ($this->basePath) {
+            $path = str_replace($this->basePath, '', $path);
+        }
 
         if (isset($this->routes[$httpMethod][$path])) {
             call_user_func($this->routes[$httpMethod][$path]);
@@ -84,7 +94,7 @@ $router->delete('/delete/item', function() {
 $router->post('/edit/item', function() {
     require 'api/items/update.php';
 });
-$router->get('read/items', function() {
+$router->get('/read/items', function() {
     require 'api/items/read.php';
 });
 $router->get('/read/item', function() {
@@ -92,7 +102,7 @@ $router->get('/read/item', function() {
 });
 
 $router->get('/', function() {
-    require 'api/items/read.php';
+    require 'home.php';
 });
 
 
