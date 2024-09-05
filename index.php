@@ -1,5 +1,4 @@
 <?php
-namespace uzziah;
 class Router
 {
     private $routes = [];
