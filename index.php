@@ -1,8 +1,8 @@
 <?php
 
-require 'Router.php';
+require_once 'Router.php';
 
-$router = new Router();
+$router = new \app\Router();
 
 $router->post('/user/create', function() {
      require 'api/user/create.php';

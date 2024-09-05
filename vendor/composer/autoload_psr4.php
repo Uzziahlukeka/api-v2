@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'uzziah\\' => array($baseDir . '/config', $baseDir . '/models'),
+    'app\\' => array($baseDir . '/app'),
     'Acer\\ApiV2\\' => array($baseDir . '/src'),
 );

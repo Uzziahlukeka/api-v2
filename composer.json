@@ -3,7 +3,10 @@
     "autoload": {
         "psr-4": {
             "Acer\\ApiV2\\": "src/",
-            "uzziah\\":["config/","models/"]
+            "uzziah\\":["config/","models/"],
+            "app\\": "app/"
+
+
         }
     },
     "authors": [

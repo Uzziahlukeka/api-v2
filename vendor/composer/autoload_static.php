@@ -11,6 +11,10 @@ class ComposerStaticInitae2331414663e2528e123b036d9150e5
         array (
             'uzziah\\' => 7,
         ),
+        'a' => 
+        array (
+            'app\\' => 4,
+        ),
         'A' => 
         array (
             'Acer\\ApiV2\\' => 11,
@@ -22,6 +26,10 @@ class ComposerStaticInitae2331414663e2528e123b036d9150e5
         array (
             0 => __DIR__ . '/../..' . '/config',
             1 => __DIR__ . '/../..' . '/models',
+        ),
+        'app\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
         'Acer\\ApiV2\\' => 
         array (
