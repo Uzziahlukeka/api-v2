@@ -144,6 +144,7 @@
                 <li><a href="https://www.cloudflare.com/fr-fr/learning/security/api/what-is-api-endpoint/">API Endpoints</a> – List of available endpoints and their details.</li>
                 <li><a href="https://www.merge.dev/blog/rest-api-authentication">Authentication</a> – How to authenticate your requests.</li>
                 <li><a href="https://blog.postman.com/rest-api-examples/">Examples</a> – Sample requests and responses.</li>
+                <li><a href="/read/items">api</a> – Sample  responses.</li>
             </ul>
         </div>
 
