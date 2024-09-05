@@ -99,6 +99,10 @@ $router->get('/read/item', function() {
 });
 
 $router->get('/', function() {
+    require 'index.php';
+});
+
+$router->get('/home', function() {
     require 'home.php';
 });
 
