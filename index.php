@@ -1,5 +1,6 @@
 <?php
-namespace app;
+
+require 'home.php';
 class Router
 {
     private $routes = [];
