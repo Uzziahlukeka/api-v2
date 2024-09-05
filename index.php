@@ -1,6 +1,6 @@
 <?php
 
-require 'home.php';
+require 'Router.php';
 
 $router = new Router();
 
