@@ -55,11 +55,11 @@ $router->get('/read/item', function() {
     require 'api/items/read_single.php';
 });
 
-$router->get('/', function() {
+$router->get('/home', function() {
     require 'index.php';
 });
 
-$router->get('/home', function() {
+$router->get('/', function() {
     require 'home.php';
 });
 
