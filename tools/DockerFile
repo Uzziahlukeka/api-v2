@@ -1,0 +1,11 @@
+FROM php:8.2-apache
+
+# Update package lists
+RUN apt-get update && apt-get install -y libzip-dev zip
+
+# Install the necessary PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql \
+    && docker-php-ext-enable mysqli pdo_mysql
+
+# Expose port 80 for Apache
+EXPOSE 80
