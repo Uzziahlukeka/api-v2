@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Our REST API Documentation</title>
+    <link rel="icon" href="https://img.swifdoo.com/image/ico-file.png" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -144,7 +145,6 @@
                 <li><a href="https://www.cloudflare.com/fr-fr/learning/security/api/what-is-api-endpoint/">API Endpoints</a> – List of available endpoints and their details.</li>
                 <li><a href="https://www.merge.dev/blog/rest-api-authentication">Authentication</a> – How to authenticate your requests.</li>
                 <li><a href="https://blog.postman.com/rest-api-examples/">Examples</a> – Sample requests and responses.</li>
-                <li><a href="/read/items">api</a> – Sample  responses.</li>
             </ul>
         </div>
 
